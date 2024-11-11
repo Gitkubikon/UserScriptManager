@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserScript Manager</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <div class="popup-container">
+        <!-- Site Header -->
+        <div class="site-section">
+            <div class="site-header flex-between">
+                <div class="site-info flex gap-sm">
+                    <img id="siteIcon" class="site-icon" src="/api/placeholder/16/16" alt="" width="16" height="16">
+                    <span id="siteDomain" class="site-domain">Loading...</span>
+                </div>
+                <label class="switch" title="Enable/Disable scripts for this site">
+                    <input type="checkbox" id="siteToggle" aria-label="Toggle scripts for this site">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+
+        <!-- Scripts Section -->
+        <div class="scripts-section">
+            <div class="section-header flex-between">
+                <h3>Active Scripts</h3>
+                <span id="scriptCount" class="script-count" role="status">0 scripts</span>
+            </div>
+
+            <div id="scriptList" class="script-list" role="list" aria-label="Active scripts">
+                <!-- Scripts will be inserted here -->
+            </div>
+
+            <div id="emptyState" class="empty-state hidden" role="status">
+                No scripts available for this site
+            </div>
+        </div>
+
+        <!-- Actions Section -->
+        <div class="actions-section flex-between">
+            <button id="settingsBtn" class="action-button" aria-label="Open Settings">
+                <svg class="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3" />
+                    <path
+                        d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z" />
+                </svg>
+                Settings
+            </button>
+
+            <button id="reloadBtn" class="action-button" aria-label="Reload Scripts">
+                <svg class="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                    <path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8" />
+                    <path d="M21 3v5h-5" />
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>

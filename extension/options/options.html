@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UserScript Manager</title>
+    <link rel="stylesheet" href="../styles/common.css">
+    <link rel="stylesheet" href="options.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <img src="/api/placeholder/48/48" alt="UserScript Manager Logo" class="logo">
+                <h1>UserScript Manager</h1>
+            </div>
+            
+            <nav class="sidebar-nav" role="navigation">
+                <button class="nav-item active" data-view="scripts" aria-label="View Scripts">
+                    <svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                        <polyline points="14 2 14 8 20 8"/>
+                        <line x1="16" y1="13" x2="8" y2="13"/>
+                        <line x1="16" y1="17" x2="8" y2="17"/>
+                        <line x1="10" y1="9" x2="8" y2="9"/>
+                    </svg>
+                    Scripts
+                </button>
+                
+                <button class="nav-item" data-view="sites" aria-label="View Sites">
+                    <svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <circle cx="12" cy="12" r="10"/>
+                        <line x1="2" y1="12" x2="22" y2="12"/>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                    </svg>
+                    Sites
+                </button>
+                
+                <button class="nav-item" data-view="settings" aria-label="View Settings">
+                    <svg class="icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    Settings
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content" role="main">
+            <!-- Status Bar -->
+            <div class="status-bar" role="status" aria-live="polite">
+                <div id="statusMessage" class="status-message"></div>
+                <div class="status-actions">
+                    <button id="reloadButton" class="button primary" aria-label="Reload Scripts">
+                        <svg class="icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                            <path d="M23 4v6h-6"/>
+                            <path d="M1 20v-6h6"/>
+                            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+                        </svg>
+                        Reload Scripts
+                    </button>
+                </div>
+            </div>
+
+            <!-- Scripts View -->
+            <section id="scriptsView" class="content-section active" role="tabpanel" aria-labelledby="scripts-tab">
+                <div class="section-header">
+                    <h2>Installed Scripts</h2>
+                    <div class="search-controls">
+                        <input type="text" 
+                               class="search-input" 
+                               placeholder="Search scripts..." 
+                               aria-label="Search scripts">
+                        
+                        <select class="filter-select" aria-label="Filter scripts">
+                            <option value="all">All Scripts</option>
+                            <option value="enabled">Enabled</option>
+                            <option value="disabled">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="script-grid" role="list" aria-label="Installed scripts"></div>
+            </section>
+
+            <!-- Sites View -->
+            <section id="sitesView" class="content-section hidden" role="tabpanel" aria-labelledby="sites-tab">
+                <div class="section-header">
+                    <h2>Site Settings</h2>
+                    <input type="text" 
+                           class="search-input" 
+                           placeholder="Search sites..." 
+                           aria-label="Search sites">
+                </div>
+
+                <div class="site-list" role="list" aria-label="Site settings"></div>
+            </section>
+
+            <!-- Settings View -->
+            <section id="settingsView" class="content-section hidden" role="tabpanel" aria-labelledby="settings-tab">
+                <div class="section-header">
+                    <h2>Settings</h2>
+                </div>
+
+                <form id="settingsForm" class="settings-grid">
+                    <div class="settings-card">
+                        <h3>Script Directory</h3>
+                        <div class="card-content">
+                            <div class="directory-path">
+                                <input type="text" 
+                                       id="scriptDirectory" 
+                                       name="scriptDirectory" 
+                                       readonly 
+                                       aria-label="Script directory path">
+                                <button type="button" class="button secondary" id="openDirectory">
+                                    Browse
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Behavior</h3>
+                        <div class="card-content">
+                            <label class="setting-item">
+                                <span>Auto-reload on file changes</span>
+                                <label class="switch">
+                                    <input type="checkbox" 
+                                           name="autoReload" 
+                                           aria-label="Auto-reload on file changes">
+                                    <span class="slider"></span>
+                                </label>
+                            </label>
+                            
+                            <label class="setting-item">
+                                <span>Show debugging information</span>
+                                <label class="switch">
+                                    <input type="checkbox" 
+                                           name="showDebug" 
+                                           aria-label="Show debugging information">
+                                    <span class="slider"></span>
+                                </label>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-card">
+                        <h3>Backup & Restore</h3>
+                        <div class="card-content">
+                            <button type="button" id="exportSettings" class="button secondary">
+                                Export Settings
+                            </button>
+                            <label class="button secondary" for="importFile">
+                                Import Settings
+                                <input type="file" 
+                                       id="importFile" 
+                                       accept=".json" 
+                                       class="hidden"
+                                       aria-label="Import settings file">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="settings-actions">
+                        <button type="submit" class="button primary">Save Settings</button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="options.js"></script>
+</body>
+</html>

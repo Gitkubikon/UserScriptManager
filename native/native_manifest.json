@@ -1,0 +1,7 @@
+{
+  "name": "userscript_manager",
+  "description": "Native host for UserScript Manager",
+  "path": "/home/nikita/firefox-userscript-manager/native/userscript_manager.py",
+  "type": "stdio",
+  "allowed_extensions": ["userscript-manager@local.firefox"]
+}

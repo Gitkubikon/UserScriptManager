@@ -1,0 +1,60 @@
+{
+    "manifest_version": 2,
+    "name": "UserScript Manager",
+    "version": "1.0.0",
+    "description": "Manage and control userscripts with site-specific settings",
+    
+    "icons": {
+      "16": "icons/16/icon.png",
+      "32": "icons/32/icon.png",
+      "48": "icons/48/icon.png",
+      "96": "icons/96/icon.png",
+      "128": "icons/128/icon.png"
+    },
+    
+    "permissions": [
+      "tabs",
+      "<all_urls>",
+      "nativeMessaging",
+      "webRequest",
+      "webRequestBlocking",
+      "storage",
+      "theme"
+    ],
+    
+    "browser_action": {
+      "default_popup": "popup/popup.html",
+      "default_icon": {
+        "16": "icons/16/icon.png",
+        "32": "icons/32/icon.png"
+      }
+    },
+    
+    "background": {
+      "scripts": ["background/background.js"],
+      "persistent": true
+    },
+    
+    "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["content/content.js"],
+      "run_at": "document_start"
+    }],
+    
+    "options_ui": {
+      "page": "options/options.html",
+      "browser_style": true,
+      "open_in_tab": true
+    },
+    
+    "web_accessible_resources": [
+      "icons/*",
+      "styles/*"
+    ],
+    
+    "applications": {
+      "gecko": {
+        "id": "userscript-manager@local.firefox"
+      }
+    }
+  }
